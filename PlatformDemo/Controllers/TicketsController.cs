@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PlatformDemo.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,38 +8,34 @@ using System.Threading.Tasks;
 namespace PlatformDemo.Controllers
 {
     [ApiController]
+    [Route("api/[controller]")]
     public class TicketsController : ControllerBase
     {
         [HttpGet]
-        [Route("api/tickets")]
         public IActionResult Get()
         {
             return Ok("REading all tickets");
         }
 
-        [HttpGet]
-        [Route("api/tickets/{id}")]
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             return Ok($"REading ticket: {id}");
         }
 
         [HttpPost]
-        [Route("api/tickets")]
-        public IActionResult Post()
+        public IActionResult Post([FromBody] Ticket ticket)
         {
-            return Ok("Creating a ticket");
+            return Ok(ticket);
         }
 
         [HttpPut]
-        [Route("api/tickets")]
-        public IActionResult Put()
+        public IActionResult Put([FromBody] Ticket ticket)
         {
-            return Ok("Updating a ticket");
+            return Ok(ticket);
         }
 
-        [HttpDelete]
-        [Route("api/tickets/{id}")]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             return Ok($"Deleting ticket: {id}");
