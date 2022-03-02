@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DataStore.EF;
+using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace WebApi.Controllers
 {
@@ -6,26 +8,38 @@ namespace WebApi.Controllers
     [Route("api/[controller]")]
     public class ProjectsController : ControllerBase
     {
+        private readonly BugsContext db;
+
+        public ProjectsController(BugsContext db)
+        {
+            this.db = db;
+        }
+
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok("REading all projects");
+            return Ok(db.Projects.ToList());
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return Ok($"REading project: {id}");
+            var project = db.Projects.Find(id);
+            if (project == null)
+                return NotFound();
+
+            return Ok(project);
         }
 
         [HttpGet]
         [Route("/api/projects/{pid}/tickets")]
-        public IActionResult GetProjectTicket(int pid, [FromQuery] int tid)
+        public IActionResult GetProjectTickets(int pid)
         {
-            if (tid == 0)
-                return Ok($"Reading all tickets belong to project #{pid}");
+            var tickets = db.Tickets.Where(x => x.ProjectId == pid);
+            if (tickets == null || tickets.Count() == 0)
+                return NotFound();
 
-            return Ok($"Reading project #{pid}, ticket #{tid}");
+            return Ok(tickets);
         }
 
         //[HttpGet]
