@@ -3,6 +3,7 @@ using DataStore.EF;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
@@ -18,15 +19,15 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<ActionResult> Get()
         {
-            return Ok(db.Projects.ToList());
+            return Ok(await db.Projects.ToListAsync());
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<ActionResult> GetById(int id)
         {
-            var project = db.Projects.Find(id);
+            var project = await db.Projects.FindAsync(id);
             if (project == null)
                 return NotFound();
 
@@ -35,9 +36,9 @@ namespace WebApi.Controllers
 
         [HttpGet]
         [Route("/api/projects/{pid}/tickets")]
-        public IActionResult GetProjectTickets(int pid)
+        public async Task<ActionResult> GetProjectTickets(int pid)
         {
-            var tickets = db.Tickets.Where(x => x.ProjectId == pid);
+            var tickets = await db.Tickets.Where(x => x.ProjectId == pid).ToListAsync();
             if (tickets == null || tickets.Count() == 0)
                 return NotFound();
 
@@ -45,27 +46,27 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Project project)
+        public async Task<ActionResult> Post([FromBody] Project project)
         {
             db.Projects.Add(project);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetById), new { id = project.ProjectId }, project);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, Project project)
+        public async Task<ActionResult> Put(int id, Project project)
         {
             if (id != project.ProjectId) return BadRequest();
 
             db.Entry(project).State = EntityState.Modified;
             try
             {
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch
             {
-                if (db.Projects.Find(id) == null)
+                if (await db.Projects.FindAsync(id) == null)
                     return NotFound();
 
                 throw;
@@ -75,13 +76,13 @@ namespace WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var project = db.Projects.Find(id);
+            var project = await db.Projects.FindAsync(id);
             if (project == null) return NotFound();
 
             db.Projects.Remove(project);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return Ok(project);
         }
