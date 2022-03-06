@@ -40,6 +40,16 @@ namespace WebApi
                 options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
                 options.ApiVersionReader = new HeaderApiVersionReader("X-API-Version");
             });
+
+            services.AddVersionedApiExplorer(options =>
+            {
+                options.GroupNameFormat = ("'v'VVV");
+            });
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My Web API v1", Version = "version 1" });
+                options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My Web API v2", Version = "version 2" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +60,13 @@ namespace WebApi
                 app.UseDeveloperExceptionPage();
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
+
+                app.UseSwagger();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Web API v1");
+                    options.SwaggerEndpoint("/swagger/v2/swagger.json", "Web API v2");
+                });
             }
 
             app.UseRouting();
