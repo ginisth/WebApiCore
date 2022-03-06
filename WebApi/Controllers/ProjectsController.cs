@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebApi.Controllers
 {
+    [ApiVersion("2.0")]
     [ApiController]
     [Route("api/[controller]")]
     public class ProjectsController : ControllerBase

@@ -6,17 +6,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApi.Filters.V2;
 
 namespace WebApi.Controllers
 {
-    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     [ApiController]
-    [Route("api/[controller]")]
-    public class TicketsController : ControllerBase
+    [Route("api/tickets")]
+    public class TicketsV2Controller : ControllerBase
     {
         private readonly BugsContext db;
 
-        public TicketsController(BugsContext db)
+        public TicketsV2Controller(BugsContext db)
         {
             this.db = db;
         }
@@ -38,6 +39,7 @@ namespace WebApi.Controllers
         }
 
         [HttpPost]
+        [Ensure_TicketDescriptionPresentActionFilter]
         public async Task<ActionResult> Post([FromBody] Ticket ticket)
         {
             db.Tickets.Add(ticket);
