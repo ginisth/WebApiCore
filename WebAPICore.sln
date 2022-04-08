@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataStore.EF", "DataStore.EF\DataStore.EF.csproj", "{E85C8600-586C-496C-B634-3ACA1AAE2DC0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Repository", "App.Repository\App.Repository.csproj", "{142742CB-0A11-490C-91A2-3495155B3C26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyApp.Repository", "App.Repository\MyApp.Repository.csproj", "{142742CB-0A11-490C-91A2-3495155B3C26}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.Testing.Console", "App.Testing.Console\App.Testing.Console.csproj", "{6DB59CA4-0CC0-4E5A-9FF8-124CBC9BBA0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationLogic", "ApplicationLogic\ApplicationLogic.csproj", "{499EBCF6-312F-4EBD-886D-5AB49626C769}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyApp.ApplicationLogic", "ApplicationLogic\MyApp.ApplicationLogic.csproj", "{499EBCF6-312F-4EBD-886D-5AB49626C769}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "WebApp\WebApp.csproj", "{F5295C82-5EBE-4E33-9A16-038992EC7C97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{499EBCF6-312F-4EBD-886D-5AB49626C769}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{499EBCF6-312F-4EBD-886D-5AB49626C769}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{499EBCF6-312F-4EBD-886D-5AB49626C769}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5295C82-5EBE-4E33-9A16-038992EC7C97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5295C82-5EBE-4E33-9A16-038992EC7C97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5295C82-5EBE-4E33-9A16-038992EC7C97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5295C82-5EBE-4E33-9A16-038992EC7C97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

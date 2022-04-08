@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using App.Repository;
-using App.Repository.ApiClient;
+using MyApp.Repository;
+using MyApp.Repository.ApiClient;
 using Core.Models;
 
 HttpClient httpClient = new HttpClient();

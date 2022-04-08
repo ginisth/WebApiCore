@@ -1,9 +1,9 @@
-﻿using App.Repository;
+﻿using MyApp.Repository;
 using Core.Models;
 
-namespace ApplicationLogic
+namespace MyApp.ApplicationLogic
 {
-    public class ProjectsScreenUseCases
+    public class ProjectsScreenUseCases : IProjectsScreenUseCases
     {
         private readonly IProjectRepository projectRepository;
 
@@ -11,7 +11,7 @@ namespace ApplicationLogic
         {
             this.projectRepository = projectRepository;
         }
-        public async Task<IEnumerable<Project>> ViewProjects()
+        public async Task<IEnumerable<Project>> ViewProjectsAsync()
         {
             return await projectRepository.GetAsync();
         }

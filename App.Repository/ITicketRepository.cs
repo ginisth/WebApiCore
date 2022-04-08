@@ -1,6 +1,6 @@
 ﻿using Core.Models;
 
-namespace App.Repository
+namespace MyApp.Repository
 {
     public interface ITicketRepository
     {
