@@ -11,7 +11,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddTransient<IProjectsScreenUseCases, ProjectsScreenUseCases>();
 builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
-builder.Services.AddSingleton<IWebApiExecuter>(sp => new WebApiExecuter("http://localhost:44351/", new HttpClient()));
+builder.Services.AddSingleton<IWebApiExecuter>(sp => new WebApiExecuter("https://localhost:44351", new HttpClient()));
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 

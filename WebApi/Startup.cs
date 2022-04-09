@@ -50,6 +50,16 @@ namespace WebApi
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My Web API v1", Version = "version 1" });
                 options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "My Web API v2", Version = "version 2" });
             });
+
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("https://localhost:7269")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +80,7 @@ namespace WebApi
             }
 
             app.UseRouting();
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {
